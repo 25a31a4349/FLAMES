@@ -1,0 +1,125 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+   
+    char name1[50];
+    char name2[50];
+
+    char temp1[50];
+    char temp2[50];
+
+    char flames[6] = {'F','L','A','M','E','S'};
+
+    int i, j;
+    int len1, len2;
+
+    int count = 0;     
+    int found;          
+
+    int index = 0;
+    int n = 6;
+    int k;
+
+    printf("Enter first name: ");
+    scanf("%s", name1);
+
+    printf("Enter second name: ");
+    scanf("%s", name2);
+
+
+    strcpy(temp1, name1);
+    strcpy(temp2, name2);
+
+    len1 = strlen(temp1);
+    len2 = strlen(temp2);
+
+
+    for(i = 0; i < len1; i++)
+    {
+        found = 0;   
+
+        for(j = 0; j < len2; j++)
+        {
+            if(temp1[i] == temp2[j])
+            {
+                if(temp2[j] != '#') 
+                {
+                    found = 1;
+
+                    temp2[j] = '#';  
+                    temp1[i] = '#';   
+
+                    break;
+                }
+            }
+        }
+    }
+
+    for(i = 0; i < len1; i++)
+    {
+        if(temp1[i] != '#')
+        {
+            count = count + 1;
+        }
+    }
+
+    for(i = 0; i < len2; i++)
+    {
+        if(temp2[i] != '#')
+        {
+            count = count + 1;
+        }
+    }
+
+    printf("\nRemaining letters count = %d\n", count);
+
+    while(n > 1)
+    {
+        index = (index + count - 1) % n;
+        printf("Removing: %c\n", flames[index]);
+
+        for(k = index; k < n - 1; k++)
+        {
+            flames[k] = flames[k + 1];
+        }
+
+        n = n - 1;
+        printf("Remaining letters: ");
+        for(k = 0; k < n; k++)
+        {
+            printf("%c ", flames[k]);
+        }
+        printf("\n");
+    }
+
+    printf("\nFinal Result: ");
+
+    if(flames[0] == 'F')
+    {
+        printf("Friends\n");
+    }
+    else if(flames[0] == 'L')
+    {
+        printf("Love\n");
+    }
+    else if(flames[0] == 'A')
+    {
+        printf("Affection\n");
+    }
+    else if(flames[0] == 'M')
+    {
+        printf("Marriage\n");
+    }
+    else if(flames[0] == 'E')
+    {
+        printf("Enemies\n");
+    }
+    else if(flames[0] == 'S')
+    {
+        printf("Siblings\n");
+    }
+
+    return 0;
+}
